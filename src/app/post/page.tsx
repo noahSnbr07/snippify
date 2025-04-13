@@ -1,4 +1,5 @@
 "use server";
+import { languages } from "@/assets/assets";
 import Divider from "../components/divider";
 
 export default async function page() {
@@ -48,13 +49,15 @@ export default async function page() {
 
                 {/* Select Language */}
                 <select
+                    defaultValue={"js"}
                     required
                     className="form-element"
                     name="language">
-                    <option value="js">js</option>
-                    <option value="ts">ts</option>
-                    <option value="jsx">jsx</option>
-                    <option value="tsx">tsx</option>
+                    {languages.map((language: string, key: number) =>
+                        <option
+                            key={key}
+                            value={language}> {language} </option>
+                    )}
                 </select>
                 <Divider />
 
