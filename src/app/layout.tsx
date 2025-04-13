@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Image from "next/image";
-import { banner } from "@/assets/assets";
+import { banner, tags } from "@/assets/assets";
 import Link from "next/link";
 import Form from "next/form";
 import database from "@/config/database";
 import { Plus } from "lucide-react";
+import Divider from "./components/divider";
+import { Tag } from "@prisma/client";
+import getPrefix from "@/functions/get-prefix";
 
 export const metadata: Metadata = {
   title: "🌩️ Snippify",
@@ -16,6 +19,9 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
 
   //get meta data
   const items = await database.snippet.findMany();
+
+  //determine prefix
+  const prefix = getPrefix();
 
   return (
     <html lang="en" className="h-full">
@@ -50,16 +56,27 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
               className="opacity-50 hover:opacity-100" />
           </Link>
         </header>
-
         <div className="size-full bordered flex flex-1 overflow-hidden">
-
-          <aside className="p-4 flex flex-col gap-2 bordered min-w-xs">
-            {items.map((item, index) => (
-              <Link
-                className="hover:opacity-100 opacity-50 cursor-pointer"
-                href={`/snippet/${item.slug}`}
-                key={index}> {item.slug} </Link>
-            ))}
+          <aside className="p-4 flex flex-col gap-2 bordered w-1/6 min-w-[200px]">
+            <b> recently added </b>
+            <div className="flex flex-col gap-2">
+              {items.map((item, index) => (
+                <Link
+                  className="hover:opacity-100 opacity-50 cursor-pointer"
+                  href={`${prefix}/snippet/${item.slug}`}
+                  key={index}> {item.slug} </Link>
+              ))}
+            </div>
+            <Divider />
+            <b> filter tags </b>
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag, key) =>
+                <Link
+                  className="px-4 py-1 bg-stack hover:bg-foreground hover:text-background rounded-full"
+                  key={key}
+                  href={`${prefix}/?tag=${encodeURI(tag)}`}> {tag} </Link>)}
+            </div>
+            <Divider />
           </aside>
 
           <div className="flex overflow-hidden flex-col bordered flex-1">
