@@ -17,6 +17,7 @@ model Snippet {
   body        String
   description String
   language    Language
+  tags        Tag[]
 }
 
 enum Language {
@@ -35,4 +36,21 @@ enum Language {
   sql
   ts
   tsx
+}
+
+enum Tag {
+  web
+  native
+  backend
+  frontend
+  fullstack
+  asynchronous
+  database
+  config
+  server
+  client
+  middleware
+  devops
+  auth
+  api
 }
