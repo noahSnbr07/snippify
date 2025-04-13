@@ -42,3 +42,6 @@ next-env.d.ts
 
 # IDE
 .vscode
+
+# DX
+todo.md

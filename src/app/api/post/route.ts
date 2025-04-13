@@ -7,8 +7,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
 
+    //get body/ form data
     const formData = await request.formData();
-    const environment = process.env.NODE_ENV as string;
+
+    //get auth key
     const key = process.env.API_KEY as string;
 
     // Get form data
@@ -18,16 +20,15 @@ export async function POST(request: NextRequest) {
     const language = formData.get('language') as string;
     const authorization = formData.get('authorization') as string;
 
+    //get prefix for absolute urls
     const prefix = getPrefix();
 
-    // Check for missing parts
-    const missingDetail: boolean =
-        !title || !description || !body || !language || !authorization;
-
-    if (missingDetail) return NextResponse.redirect(prefix);
-
+    // Check for missing detail/ auth
+    const missingDetail: boolean = !title || !description || !body || !language || !authorization;
     const invalidAuth: boolean = authorization != key;
-    if (invalidAuth) return NextResponse.redirect(prefix);
+
+    //redirect
+    if (missingDetail || invalidAuth) return NextResponse.redirect(prefix, { status: 308 });
 
     // Generate slug
     const slug = getSlug(title);
@@ -39,19 +40,24 @@ export async function POST(request: NextRequest) {
         description,
         language: language as Language,
         body: JSON.stringify(body),
-    } as Snippet
+    } as Snippet;
 
     try {
+
+        //insert item
         const inserted = await database.snippet.create({ data: newSnippet });
 
-        //get redirection url based on environment
+        //clear cache on items
         revalidatePath("/");
-        const url = new URL(`${environment === "development" ? "http://localhost:3000" : "https://snippify-beta.vercel.app"}/snippet/${inserted.slug}`);
-        return NextResponse.redirect(url);
+
+        //redirect to inserted item
+        const url = new URL(`${prefix}/snippet/${inserted.slug}`);
+        return NextResponse.redirect(url, { status: 308 });
     } catch (error) {
-        if (error instanceof Error) {
-            return NextResponse.json({ error: error.message }, { status: 500 });
-        }
+
+        //raw api return
+        if (error instanceof Error) return NextResponse.json({ error: error.message }, { status: 500 });
+
         return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
     }
 }

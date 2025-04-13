@@ -1,6 +1,9 @@
+/**
+ * 
+ * @param body stringified code block
+ * @returns parsed code block with white spaces
+ * formats for unix, max, windows
+ */
 export default function getRawBody(body: string): string {
-    return body
-        .replace(/^"(.+)"$/, '$1') //remove trailing quotes
-        .replace(/\\n/g, '\n') //remove "\n"
-        .replace(/\\/g, ''); //remove "\"
+    return JSON.parse(body);
 }

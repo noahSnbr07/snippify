@@ -14,6 +14,9 @@ export default async function page() {
 
                 {/* Enter Title */}
                 <input
+                    required
+                    autoComplete="off"
+                    autoCorrect="off"
                     className="form-element"
                     placeholder="Title"
                     name="title"
@@ -21,6 +24,8 @@ export default async function page() {
 
                 {/* Enter Description */}
                 <textarea
+                    autoComplete="off"
+                    autoCorrect="off"
                     className="form-element"
                     maxLength={100}
                     placeholder="description"
@@ -31,6 +36,9 @@ export default async function page() {
 
                 {/* Enter Body */}
                 <textarea
+                    required
+                    autoComplete="off"
+                    autoCorrect="off"
                     className="form-element"
                     placeholder="body"
                     name="body"
@@ -40,6 +48,7 @@ export default async function page() {
 
                 {/* Select Language */}
                 <select
+                    required
                     className="form-element"
                     name="language">
                     <option value="js">js</option>
@@ -51,6 +60,7 @@ export default async function page() {
 
                 {/* Authorize Access */}
                 <input
+                    required
                     name="authorization"
                     className="form-element"
                     type="password"
@@ -62,6 +72,6 @@ export default async function page() {
                     className="border p-4 font-bold text-lg rounded-lg cursor-pointer"
                     type="submit"> Publish Snippet </button>
             </form>
-        </div >
+        </div>
     );
 }
