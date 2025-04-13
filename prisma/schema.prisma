@@ -20,16 +20,19 @@ model Snippet {
 }
 
 enum Language {
-  js
-  ts
-  jsx
-  tsx
-  jav
+  c
   cpp
   cs
-  py
-  php
   css
+  elixir
   html
+  jav
+  js
+  jsx
+  php
   prisma
+  py
+  sql
+  ts
+  tsx
 }
