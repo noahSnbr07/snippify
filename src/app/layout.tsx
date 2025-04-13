@@ -5,7 +5,7 @@ import { banner } from "@/assets/assets";
 import Link from "next/link";
 import Form from "next/form";
 import database from "@/config/database";
-import { User } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "🌩️ Snippify",
@@ -44,8 +44,8 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
           </Form>
 
           <Link
-            href={"/"}>
-            <User
+            href={"/post"}>
+            <Plus
               size={32}
               className="opacity-50 hover:opacity-100" />
           </Link>

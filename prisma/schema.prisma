@@ -9,18 +9,17 @@ datasource db {
 }
 
 model Snippet {
-  id          String    @id @unique @default(uuid())
-  created     DateTime  @default(now())
-  updated     DateTime  @updatedAt
-  slug        String    @unique
+  id          String   @id @unique @default(uuid())
+  created     DateTime @default(now())
+  updated     DateTime @updatedAt
+  slug        String   @unique
   title       String
   body        String
   description String
   language    Language
-  extension   Extension
 }
 
-enum Extension {
+enum Language {
   js
   ts
   jsx
@@ -29,21 +28,6 @@ enum Extension {
   cpp
   cs
   py
-  php
-  css
-  html
-  prisma
-}
-
-enum Language {
-  javascript
-  typescript
-  jsx
-  tsx
-  java
-  cpp
-  csharp
-  python
   php
   css
   html
