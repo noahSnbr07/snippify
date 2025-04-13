@@ -1,3 +1,3 @@
 export default function getSlug(base: string): string {
-    return base.toLowerCase().replaceAll(" ", "-").trim();
+    return base.trim().toLowerCase().replaceAll(" ", "-");
 }
