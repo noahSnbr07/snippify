@@ -8,6 +8,7 @@ import database from "@/config/database";
 import { Plus } from "lucide-react";
 import Divider from "./components/divider";
 import getPrefix from "@/functions/get-prefix";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "🌩️ Snippify",
@@ -24,6 +25,10 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
 
   return (
     <html lang="en" className="h-full">
+
+      {/* Enable Vercel Analytics */}
+      <Analytics mode="auto" />
+
       <body className="h-full">
         <header className="p-6 gap-6 justify-between flex bordered shrink-0">
           <Link
