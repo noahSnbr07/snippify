@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Image from "next/image";
-import { banner, tags } from "@/assets/assets";
+import { banner, links, tags } from "@/assets/assets";
 import Link from "next/link";
 import Form from "next/form";
 import database from "@/config/database";
@@ -30,7 +30,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
       <Analytics mode="auto" />
 
       <body className="h-full">
-        <header className="p-6 gap-6 justify-between flex bordered shrink-0">
+        <header className="border-b items-center border-stack p-6 gap-6 justify-between flex shrink-0">
           <Link
             href={"/"}>
             <Image
@@ -53,15 +53,17 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
             />
           </Form>
 
-          <Link
-            href={"/post"}>
-            <Plus
-              size={32}
-              className="opacity-50 hover:opacity-100" />
-          </Link>
+          <div className="flex gap-4">
+            {links.map((link) =>
+              <Link
+                key={link.key}
+                title={link.title}
+                href={link.href}> {link.icon} </Link>)}
+          </div>
+
         </header>
-        <div className="size-full bordered flex flex-1 overflow-hidden">
-          <aside className="p-4 flex flex-col gap-2 bordered w-1/6 min-w-[200px]">
+        <div className="size-full flex flex-1 overflow-hidden">
+          <aside className="p-4 border-r border-stack flex flex-col gap-2 w-1/6 min-w-[200px]">
             <b> recently added </b>
             <div className="flex flex-col gap-2">
               {items.map((item, index) => (
@@ -83,13 +85,13 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
             <Divider />
           </aside>
 
-          <div className="flex overflow-hidden flex-col bordered flex-1">
+          <div className="flex overflow-hidden flex-col flex-1">
 
-            <main className="flex-1 overflow-y-auto flex bordered p-4">
+            <main className="flex-1 overflow-y-auto flex p-4">
               {children}
             </main>
 
-            <footer className="px-4 py-2 bordered gap-2">
+            <footer className="px-4 py-2 gap-2 border-t border-stack">
               <i className="text-sm opacity-50"> {items.length} snippets total </i>
             </footer>
 
