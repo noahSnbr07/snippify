@@ -9,7 +9,6 @@ interface props {
     item: Snippet;
 }
 export default async function MetaData({ item }: props) {
-    console.log(item.tags)
     return (
         <div className="flex-1 p-4 flex flex-col gap-4">
             <h1 className="font-bold text-xl"> {item.title} </h1>

@@ -61,3 +61,7 @@ body {
   background-color: var(--stack);
   border-radius: 999px;
 }
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
