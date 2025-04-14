@@ -5,7 +5,6 @@ import { banner, links, tags } from "@/assets/assets";
 import Link from "next/link";
 import Form from "next/form";
 import database from "@/config/database";
-import { Plus } from "lucide-react";
 import Divider from "./components/divider";
 import getPrefix from "@/functions/get-prefix";
 import { Analytics } from "@vercel/analytics/next";
