@@ -1,4 +1,4 @@
-import { Home, Plus, User } from "lucide-react";
+import { Mail, Plus, User } from "lucide-react";
 
 interface HeaderLink {
     key: number;
@@ -9,8 +9,8 @@ interface HeaderLink {
 
 const links: HeaderLink[] = [
     { key: 0, title: "Post", href: "/post", icon: <Plus /> },
-    { key: 1, title: "Contact", href: "https://www.instagram.com/noahcodesstuff/", icon: <User /> },
-    { key: 2, title: "Home", href: "/", icon: <Home /> },
+    { key: 1, title: "Contact", href: "https://www.instagram.com/noahcodesstuff/", icon: <Mail /> },
+    { key: 2, title: "Account", href: "/authentication", icon: <User /> },
 ];
 
 export default links;

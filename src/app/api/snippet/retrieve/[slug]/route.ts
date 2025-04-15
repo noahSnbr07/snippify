@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ slug: string }> }): Promise<NextResponse> {
+    //get slug
     const slug = (await params).slug;
 
     if (!slug || slug.length < 1) return NextResponse.json(

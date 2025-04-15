@@ -10,7 +10,7 @@ export default function getPrefix(): URL {
 
     try {
         const environment = process.env.NODE_ENV;
-        return new URL(environment === "development" ? "http://localhost:3000/" : "https://snippify-beta.vercel.app/");
+        return new URL(environment === "development" ? "http://localhost:3000" : "https://snippify-beta.vercel.app");
     } catch (error) {
         if (error instanceof Error) throw new Error(error.message)
     }

@@ -1,12 +1,13 @@
 'use server';
 
 import Divider from "@/app/components/divider";
-import { Snippet, Tag } from "@prisma/client";
+import SnippetWithUser from "@/interfaces/snippet-with-user";
+import { Tag } from "@prisma/client";
 import { Trash } from "lucide-react";
 import Link from "next/link";
 
 interface props {
-    item: Snippet;
+    item: SnippetWithUser;
 }
 export default async function MetaData({ item }: props) {
     return (
@@ -14,6 +15,7 @@ export default async function MetaData({ item }: props) {
             <h1 className="font-bold text-xl"> {item.title} </h1>
             <p> {item.description} </p>
             <Divider />
+            <b> owner: {item.owner.name} </b>
             <p> created: {item.created.toLocaleDateString()} - {item.created.toLocaleTimeString()} </p>
             <p> updated: {item.updated.toLocaleDateString()} - {item.updated.toLocaleTimeString()} </p>
             <div className="flex gap-2">
@@ -28,7 +30,7 @@ export default async function MetaData({ item }: props) {
             <form
                 className="flex bg-stack rounded-lg p-2 gap-2"
                 method="POST"
-                action={`/api/delete/${item.slug}`}>
+                action={`/api/snippet/delete/${item.slug}`}>
                 <button
                     type="submit"
                     className="bg-stack rounded-lg p-2 cursor-pointer">
@@ -38,7 +40,7 @@ export default async function MetaData({ item }: props) {
                     required
                     type="password"
                     name="authorization"
-                    placeholder="authorization"
+                    placeholder="your password"
                     className="flex-1 px-4 py-1 bg-background rounded-md" />
             </form>
         </div>

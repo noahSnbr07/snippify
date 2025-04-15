@@ -16,9 +16,7 @@ export default async function page({ searchParams }: { searchParams: Promise<{ q
     ];
   }
 
-  if (tag) {
-    filters.tags = { has: tag as Tag };
-  }
+  if (tag) filters.tags = { has: tag as Tag };
 
   const snippets = await database.snippet.findMany({
     where: Object.keys(filters).length > 0 ? filters : undefined,

@@ -6,7 +6,6 @@ import Link from "next/link";
 import Form from "next/form";
 import database from "@/config/database";
 import Divider from "./components/divider";
-import getPrefix from "@/functions/get-prefix";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
@@ -18,9 +17,6 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
 
   //get meta data
   const items = await database.snippet.findMany();
-
-  //determine prefix
-  const prefix = getPrefix();
 
   return (
     <html lang="en" className="h-full">
@@ -68,7 +64,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
               {items.map((item, index) => (
                 <Link
                   className="hover:opacity-100 opacity-50 cursor-pointer"
-                  href={`${prefix}/snippet/${item.slug}`}
+                  href={`/snippet/${item.slug}`}
                   key={index}> {item.slug} </Link>
               ))}
             </div>
@@ -79,7 +75,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
                 <Link
                   className="px-4 py-1 bg-stack hover:bg-foreground hover:text-background rounded-full"
                   key={key}
-                  href={`${prefix}/?tag=${encodeURI(tag)}`}> {tag} </Link>)}
+                  href={`/?tag=${encodeURI(tag)}`}> {tag} </Link>)}
             </div>
             <Divider />
           </aside>

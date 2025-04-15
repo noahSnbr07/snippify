@@ -10,7 +10,7 @@ export default async function page() {
             <h1 className="text-lg font-bold"> Create Snippet </h1>
             <form
                 method="POST"
-                action={"/api/post"}
+                action={"/api/snippet/post"}
                 className="bg-stack max-w-5xl flex flex-col gap-4 p-4 rounded-lg">
 
                 {/* Enter Title */}
@@ -67,7 +67,7 @@ export default async function page() {
                     name="authorization"
                     className="form-element"
                     type="password"
-                    placeholder="authorization key"
+                    placeholder="your password"
                 />
 
                 {/* Submit Form */}
