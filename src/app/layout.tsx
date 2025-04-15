@@ -62,7 +62,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
 
         </header>
         <div className="size-full flex flex-1 overflow-hidden">
-          <aside className="p-4 border-r border-stack flex flex-col gap-2 w-1/6 min-w-[200px]">
+          <aside className="p-4 overflow-y-auto border-r border-stack flex flex-col gap-2 w-1/6 min-w-[200px]">
             <b> recently added </b>
             <div className="flex flex-col gap-2">
               {items.map((item, index) => (
