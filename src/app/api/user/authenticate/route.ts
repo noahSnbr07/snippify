@@ -24,19 +24,13 @@ export async function POST(_request: NextRequest) {
 
     //validate content
     const invalid: boolean = !name || !password || name.length < 1 || password.length < 1;
-    if (invalid) redirect(`/authentication`);
+    if (invalid) return NextResponse.redirect(`${prefix}/error?status=500&message=missing+form+elements`);
 
     try {
 
         //find user by name
         const user = await database.user.findUnique({ where: { name: name } });
-        if (!user) return NextResponse.json({
-            message: "user not found",
-            ok: false,
-            status: 404,
-            data: user,
-            error: null
-        }, { status: 404 });
+        if (!user) return NextResponse.redirect(`${prefix}/error?status=404&message=user+not+found`);
 
         //validate credentials
         const match: boolean = user.password === formPassword;
@@ -57,7 +51,7 @@ export async function POST(_request: NextRequest) {
                 });
 
             //construct response 
-            const response = NextResponse.redirect(`${prefix}`);
+            const response = NextResponse.redirect(`${prefix}/authentication`);
 
             response.cookies.set("token", token, {
                 httpOnly: true,
@@ -71,24 +65,9 @@ export async function POST(_request: NextRequest) {
         }
 
         //no match
-        return NextResponse.json({
-            message: "invalid credentials",
-            ok: false,
-            status: 500,
-            data: { ...user, match },
-            error: null,
-        }, { status: 500 });
+        return NextResponse.redirect(`${prefix}/error?status=401&message=credential+mismatch`);
 
-    } catch (error) {
-        return NextResponse.json({
-            message: "failure",
-            ok: false,
-            status: 500,
-            data: { name, valid: String(!invalid) },
-            error: {
-                message: error instanceof Error ? error.message : "Uncaught",
-                cause: error instanceof Error && error.cause ? error.cause : null,
-            },
-        }, { status: 500 });
+    } catch {
+        return NextResponse.redirect(`${prefix}/error?status=500&message=uncaught+error`);
     }
 }

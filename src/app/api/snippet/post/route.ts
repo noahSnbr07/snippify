@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(_request: NextRequest) {
 
     const authenticationState = await getAuthenticationState();
-    if (!authenticationState) redirect("/authentication");
+    if (!authenticationState) redirect("/error?status=401&message=authenticate+to+post");
 
     //get prefix
     const prefix = getPrefix();
@@ -36,7 +36,8 @@ export async function POST(_request: NextRequest) {
     const invalidAuth: boolean = authorization != key;
 
     //redirect
-    if (missingDetail || invalidAuth) return redirect("/error");
+    if (missingDetail) return redirect(`/error?status=500&message=invalid+form`);
+    if (invalidAuth) return redirect(`/error?status=401&message=credential+mismatch`);
 
     // Generate slug
     const slug = getSlug(title);

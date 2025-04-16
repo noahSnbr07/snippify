@@ -15,7 +15,6 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
             error: null,
         }, { status: 500 });
 
-
     try {
         const snippet = await database.snippet.findUnique({
             where: { slug },
