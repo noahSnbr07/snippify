@@ -9,6 +9,7 @@ import Divider from "./divider";
 interface props {
     snippet: SnippetType;
 }
+
 export default async function Snippet({ snippet }: props) {
     const { slug, title, body, language, description } = snippet;
     const raw = getRawBody(body);
@@ -25,7 +26,7 @@ export default async function Snippet({ snippet }: props) {
                 showLineNumbers
                 customStyle={{ height: 200, backgroundColor: 'transparent', padding: 0 }}
                 style={dark}
-                language={language}>
+                language={language as string}>
                 {raw}
             </SyntaxHighlighter>
             <Divider />
