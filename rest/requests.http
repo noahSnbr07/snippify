@@ -1,0 +1,6 @@
+//retrieve a snippet by slug
+GET http://localhost:3000/api/snippet/retrieve/route-handler
+
+Content-Type: application/json
+Accept: application/json
+###
