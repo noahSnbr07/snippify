@@ -1,5 +1,7 @@
 'use server';
-export default async function Divider() {
+export default async function Divider({ width }: { width?: number }) {
 
-    return <hr className="border-1 border-stack" />
+    return <hr
+        style={{ width: width }}
+        className="border-1 border-stack w-full" />
 }

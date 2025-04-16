@@ -33,7 +33,7 @@ export default async function MetaData({ item }: props) {
                 action={`/api/snippet/delete/${item.slug}`}>
                 <button
                     type="submit"
-                    className="bg-stack rounded-lg p-2 cursor-pointer">
+                    className="bg-stack rounded-lg p-2">
                     <Trash />
                 </button>
                 <input

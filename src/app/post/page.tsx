@@ -72,7 +72,7 @@ export default async function page() {
 
                 {/* Submit Form */}
                 <button
-                    className="border p-4 font-bold text-lg rounded-lg cursor-pointer"
+                    className="border p-4 font-bold text-lg rounded-lg"
                     type="submit"> Publish Snippet </button>
             </form>
         </div>
