@@ -2,7 +2,6 @@ import database from "@/config/database";
 import getPrefix from "@/functions/get-prefix";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { redirect } from "next/navigation";
 
 export async function POST(_request: NextRequest) {
 

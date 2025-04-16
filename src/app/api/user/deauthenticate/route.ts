@@ -1,8 +1,8 @@
 import getPrefix from "@/functions/get-prefix";
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(_request: NextRequest) {
+export async function POST() {
 
     //get cookies
     const cookieStore = await cookies();
