@@ -15,10 +15,10 @@ export default async function Page({ params }: props) {
 
     const item = await database.snippet.findUnique({
         where: { slug: slug },
-        include: { owner: true }
+        include: { user: true }
     }) as SnippetWithUser;
 
-    if (!item) redirect("/");
+    if (!item) redirect(`/error?status=404&message=not+found`);
 
     return (
         <div className="flex-1 flex">

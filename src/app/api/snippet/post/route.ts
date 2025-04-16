@@ -57,14 +57,14 @@ export async function POST(_request: NextRequest) {
         const inserted = await database.snippet.create({
             data: {
                 ...newSnippet,
-                owner: {
+                user: {
                     connect: { id: userId }
                 }
             }
         });
 
         // Clear cache on items
-        revalidatePath("/");
+        revalidatePath('/', 'layout')
 
         // Redirect with NextResponse
         return NextResponse.redirect(`${prefix}/snippet/${inserted.slug}`);

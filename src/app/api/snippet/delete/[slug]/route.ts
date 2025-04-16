@@ -48,7 +48,7 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
         if (!snippet) return redirect(`/error?status=404&message=snippet+not+found`)
 
         //clear cache on items
-        revalidatePath("/");
+        revalidatePath('/', 'layout')
 
         //redirect to index
         return NextResponse.redirect(prefix);

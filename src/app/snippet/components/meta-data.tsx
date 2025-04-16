@@ -15,7 +15,7 @@ export default async function MetaData({ item }: props) {
             <h1 className="font-bold text-xl"> {item.title} </h1>
             <p> {item.description} </p>
             <Divider />
-            <b> owner: {item.owner.name} </b>
+            <b> user: {item.user.name} </b>
             <p> created: {item.created.toLocaleDateString()} - {item.created.toLocaleTimeString()} </p>
             <p> updated: {item.updated.toLocaleDateString()} - {item.updated.toLocaleTimeString()} </p>
             <div className="flex gap-2">

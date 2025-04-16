@@ -18,7 +18,7 @@ model Snippet {
   description String
   language    Language
   tags        Tag[]
-  owner       User?    @relation(fields: [userId], references: [id])
+  user        User?    @relation(fields: [userId], references: [id])
   userId      String?
 }
 
