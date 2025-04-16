@@ -35,11 +35,11 @@ export async function POST(_request: NextRequest) {
     const missingDetail: boolean = !title || !description || !body || !language || !authorization;
     const invalidAuth: boolean = authorization != key;
 
-    //redirect
+    //invalid body || auth -> redirect
     if (missingDetail) return redirect(`/error?status=500&message=invalid+form`);
     if (invalidAuth) return redirect(`/error?status=401&message=credential+mismatch`);
 
-    // Generate slug
+    // Generate slug by title
     const slug = getSlug(title);
 
     // Construct new snippet
