@@ -29,7 +29,6 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
           <Link
             href={"/"}>
             <Image
-              className="hover:opacity-50"
               src={banner}
               priority
               height={32}
@@ -51,6 +50,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
           <div className="flex gap-4">
             {links.map((link) =>
               <Link
+                className="opacity-50 hover:opacity-100"
                 key={link.key}
                 title={link.title}
                 href={link.href}> {link.icon} </Link>)}
@@ -63,7 +63,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
             <div className="flex flex-col gap-2">
               {items.map((item, index) => (
                 <Link
-                  className="hover:opacity-100 opacity-50 cursor-pointer"
+                  className="hover:opacity-100 opacity-50"
                   href={`/snippet/${item.slug}`}
                   key={index}> {item.slug} </Link>
               ))}
