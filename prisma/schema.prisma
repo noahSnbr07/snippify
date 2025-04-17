@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "src/config/database"
 }
 
 datasource db {
@@ -33,21 +34,32 @@ model User {
 }
 
 enum Language {
+  bash
   c
   cpp
   cs
+  csharp
   css
-  elixir
+  csv
+  dart
+  go
   html
-  jav
-  js
+  java
+  javascript
+  json
   jsx
+  kotlin
   php
   prisma
-  py
+  python
+  ruby
+  rust
+  sass
   sql
-  ts
+  svelte
+  swift
   tsx
+  typescript
 }
 
 enum Tag {
