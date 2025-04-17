@@ -1,5 +1,5 @@
 "use server";
-import { languages } from "@/assets/assets";
+import { languages, tags } from "@/assets/assets";
 import Divider from "../components/divider";
 
 export default async function page() {
@@ -57,6 +57,20 @@ export default async function page() {
                         <option
                             key={key}
                             value={language}> {language} </option>
+                    )}
+                </select>
+
+                {/* Select Tags */}
+                <select
+                    size={tags.length}
+                    multiple
+                    required
+                    className="form-element"
+                    name="tags">
+                    {tags.map((tag: string, key: number) =>
+                        <option
+                            key={key}
+                            value={tag}> {tag} </option>
                     )}
                 </select>
                 <Divider />
