@@ -1,18 +1,16 @@
 'use server';
-import getRawBody from "@/functions/get-raw-body";
 import { Snippet as SnippetType } from "@prisma/client";
 import Link from "next/link";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { dark, } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import Divider from "./divider";
+import CodeBlock from "./code-block";
 
 interface props {
     snippet: SnippetType;
 }
 
+
 export default async function Snippet({ snippet }: props) {
     const { slug, title, body, language, description } = snippet;
-    const raw = getRawBody(body);
 
     return (
         <div
@@ -22,13 +20,9 @@ export default async function Snippet({ snippet }: props) {
                 <b className="text-lg"> {title} </b>
             </Link>
             <Divider />
-            <SyntaxHighlighter
-                showLineNumbers
-                customStyle={{ height: 200, backgroundColor: 'transparent', padding: 0 }}
-                style={dark}
-                language={language as string}>
-                {raw}
-            </SyntaxHighlighter>
+            <CodeBlock
+                code={body}
+                language={language} />
             <Divider />
             <p> {description} </p>
         </div>
