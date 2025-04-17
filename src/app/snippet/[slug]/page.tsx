@@ -1,10 +1,10 @@
 'use server';
 
 import database from "@/config/database";
-import CodeBlock from "../components/code-block";
 import { redirect } from "next/navigation";
 import MetaData from "../components/meta-data";
 import SnippetWithUser from "@/interfaces/snippet-with-user";
+import CodeBlock from "@/app/components/code-block";
 
 interface props {
     params: Promise<{ slug: string }>;
@@ -22,7 +22,9 @@ export default async function Page({ params }: props) {
 
     return (
         <div className="flex-1 flex">
-            <CodeBlock language={item.language} code={item.body} />
+            <CodeBlock
+                language={item.language}
+                code={item.body} />
             <MetaData item={item} />
         </div>
     );
