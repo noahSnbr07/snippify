@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import MetaData from "../components/meta-data";
 import SnippetWithUser from "@/interfaces/snippet-with-user";
 import CodeBlock from "@/app/components/code-block";
+import { BundledLanguage } from "shiki";
 
 interface props {
     params: Promise<{ slug: string }>;
@@ -23,7 +24,7 @@ export default async function Page({ params }: props) {
     return (
         <div className="flex-1 flex">
             <CodeBlock
-                language={item.language}
+                language={item.language as BundledLanguage}
                 code={item.body} />
             <MetaData item={item} />
         </div>
