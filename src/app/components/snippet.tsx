@@ -9,7 +9,6 @@ interface props {
     snippet: SnippetType;
 }
 
-
 export default async function Snippet({ snippet }: props) {
     const { slug, title, body, language, description } = snippet;
 
