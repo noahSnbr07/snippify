@@ -3,6 +3,7 @@ import { Snippet as SnippetType } from "@prisma/client";
 import Link from "next/link";
 import Divider from "./divider";
 import CodeBlock from "./code-block";
+import { BundledLanguage } from "shiki";
 
 interface props {
     snippet: SnippetType;
@@ -22,7 +23,7 @@ export default async function Snippet({ snippet }: props) {
             <Divider />
             <CodeBlock
                 code={body}
-                language={language} />
+                language={language as BundledLanguage} />
             <Divider />
             <p> {description} </p>
         </div>
