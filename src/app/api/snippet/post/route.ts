@@ -2,7 +2,7 @@ import database from '@/config/database';
 import getAuthenticationState from '@/functions/get-authentication';
 import getPrefix from '@/functions/get-prefix';
 import getSlug from '@/functions/get-slug';
-import { Language } from '@prisma/client';
+import { Language, Tag } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { NextRequest, NextResponse } from 'next/server';
@@ -29,6 +29,8 @@ export async function POST(_request: NextRequest) {
     const description = formData.get('description') as string;
     const body = formData.get('body') as string;
     const language = formData.get('language') as string;
+    const tags = formData.getAll('tags') || [] as string[];
+
     const authorization = formData.get('authorization') as string;
 
     // Check for missing detail/ auth
@@ -49,7 +51,7 @@ export async function POST(_request: NextRequest) {
         description,
         language: language as Language,
         body: JSON.stringify(body),
-        tags: [],
+        tags: tags as Tag[],
     };
 
     try {
@@ -68,7 +70,8 @@ export async function POST(_request: NextRequest) {
 
         // Redirect with NextResponse
         return NextResponse.redirect(`${prefix}/snippet/${inserted.slug}`);
-    } catch {
+    } catch (error) {
+        console.log(error);
         return NextResponse.redirect(`${prefix}/error`)
     }
 }

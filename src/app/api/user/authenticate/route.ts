@@ -5,13 +5,11 @@ import jwt from "jsonwebtoken";
 
 export async function POST(_request: NextRequest) {
 
-
     //get jwt secret
     const jwtSecret = process.env.JWT_SECRET as string;
 
-    //retrieve form data
+    //retrieve form password
     const formData = _request.formData();
-
     const formPassword = (await formData).get("password");
 
     //determine prefix
