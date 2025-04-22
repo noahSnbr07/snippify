@@ -2,6 +2,7 @@ import database from "@/config/database";
 import getAuthentication from "@/functions/get-authentication";
 import { NextRequest, NextResponse } from "next/server";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(_request: NextRequest) {
     const authentication = await getAuthentication();
     if (!authentication) return NextResponse.json(
