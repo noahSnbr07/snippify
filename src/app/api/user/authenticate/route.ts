@@ -34,11 +34,22 @@ export async function POST(_request: NextRequest) {
 
         if (match) {
 
+            //update login time
+            await database.user.update({
+                where: {
+                    id: user.id
+                },
+                data: {
+                    lastLogin: new Date()
+                },
+            });
+
             //sign JWT
             const token = jwt.sign({
                 name: user.name,
                 id: user.id,
                 isDeactivated: user.isDeactivated,
+                isAdmin: user.isAdmin,
             },
                 jwtSecret,
                 {
@@ -64,7 +75,8 @@ export async function POST(_request: NextRequest) {
         //no match
         return NextResponse.redirect(`${prefix}/error?status=401&message=credential+mismatch`);
 
-    } catch {
+    } catch (error) {
+        console.error(error)
         return NextResponse.redirect(`${prefix}/error?status=500&message=uncaught+error`);
     }
 }

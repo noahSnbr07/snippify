@@ -1,5 +1,5 @@
 import database from '@/config/database';
-import getAuthenticationState from '@/functions/get-authentication';
+import getAuthentication from '@/functions/get-authentication';
 import getPrefix from '@/functions/get-prefix';
 import getSlug from '@/functions/get-slug';
 import { Language, Tag } from '@prisma/client';
@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(_request: NextRequest) {
 
-    const authenticationState = await getAuthenticationState();
+    const authenticationState = await getAuthentication();
     if (!authenticationState) redirect("/error?status=401&message=authenticate+to+post");
 
     //get prefix

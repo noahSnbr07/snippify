@@ -1,5 +1,5 @@
 import database from "@/config/database";
-import getAuthenticationState from "@/functions/get-authentication";
+import getAuthentication from "@/functions/get-authentication";
 import getPrefix from "@/functions/get-prefix";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -9,7 +9,7 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
 
 
     //get authentication state
-    const authenticationState = await getAuthenticationState();
+    const authenticationState = await getAuthentication();
     if (!authenticationState) redirect(`/error?status=401&message=invalid+auth`);
 
     //get prefix
