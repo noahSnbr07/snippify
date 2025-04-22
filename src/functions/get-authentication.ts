@@ -1,18 +1,35 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-// This function returns the decoded data if valid, or null if invalid
-export default async function getAuthenticationState(): Promise<jwt.JwtPayload | null> {
+interface Authentication {
+    name: string;
+    id: string;
+    isDeactivated: boolean;
+    isAdmin: boolean;
+    iat: number;
+    exp: number;
+    iss: string;
+}
 
+// This function returns the decoded data if valid, or null if invalid
+export default async function getAuthentication(): Promise<Authentication | null> {
+
+    //retrieve key, token
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value as string;
     const key = process.env.JWT_SECRET as string;
 
     try {
+
+        //decode token
         const decoded = jwt.verify(token, key);
-        if (decoded) return decoded as JwtPayload;
+        if (decoded) return decoded as Authentication;
     } catch {
+
+        //error
         return null;
     }
+
+    //error
     return null;
 }
