@@ -2,13 +2,16 @@
 
 import { banner } from "@/assets/assets";
 import Image from "next/image";
-import getAuthenticationState from "@/functions/get-authentication";
-import { Info } from "lucide-react";
+import getAuthentication from "@/functions/get-authentication";
+import { Clock, Info } from "lucide-react";
 import Link from "next/link";
+import endpoints from "@/assets/constants/endpoints";
+import getTokenExpiration from "@/functions/get-toke-expiration";
 
 export default async function page() {
 
-    const isAuthenticated = await getAuthenticationState();
+    const isAuthenticated = await getAuthentication();
+    const expiration = await getTokenExpiration();
 
     return (
         <div className="size-full flex justify-center items-center flex-col gap-8">
@@ -22,7 +25,7 @@ export default async function page() {
                 <>
                     <form
                         method="POST"
-                        action={`/api/user/authenticate`}
+                        action={endpoints(null, null).user.post.authenticate}
                         className="flex flex-col gap-4 p-4 bg-stack w-min rounded-lg"
                     >
                         <input
@@ -59,9 +62,13 @@ export default async function page() {
                         <Info size={16} className="opacity-50" />
                         <i className="opacity-50"> Your are currently authenticated </i>
                     </div>
+                    <div className="flex gap-2 items-center">
+                        <Clock size={16} className="opacity-50" />
+                        <i className="opacity-50"> Your token expires at {expiration || ""} </i>
+                    </div>
                     <form
                         method="POST"
-                        action={"/api/user/deauthenticate"}>
+                        action={endpoints(null, null).user.post.deauthenticate}>
                         <button
                             type="submit"
                             className="px-8 py-2 rounded-lg bg-stack font-bold"> log out </button>
