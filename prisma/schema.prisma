@@ -26,9 +26,11 @@ model User {
   id             String    @id @default(uuid())
   created        DateTime  @default(now())
   updated        DateTime  @updatedAt
+  lastLogin      DateTime  @default(now())
   name           String    @unique
   password       String
   isDeactivated  Boolean   @default(false)
+  isAdmin        Boolean   @default(false)
   snippetsPosted Snippet[]
 }
 
