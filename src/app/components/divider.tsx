@@ -1,5 +1,6 @@
-'use server';
-export default async function Divider({ width }: { width?: number }) {
+"use client";
+
+export default function Divider({ width }: { width?: number }) {
 
     return <hr
         style={{ width: width }}
