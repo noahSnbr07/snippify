@@ -7,10 +7,13 @@ interface HeaderLink {
     icon: React.JSX.Element;
 }
 
+/**
+ * static collection of links in the header
+ */
 const links: HeaderLink[] = [
-    { key: 0, title: "Post", href: "/post", icon: <Plus /> },
-    { key: 1, title: "Contact", href: "https://www.instagram.com/noahcodesstuff/", icon: <Mail /> },
-    { key: 2, title: "Account", href: "/authentication", icon: <User /> },
+    { key: 0, title: "Create", href: "/create", icon: <Plus size={20} /> },
+    { key: 1, title: "Contact", href: "https://www.instagram.com/noah.codes.stuff/", icon: <Mail size={20} /> },
+    { key: 2, title: "Account", href: "/authentication", icon: <User size={20} /> },
 ];
 
 export default links;
