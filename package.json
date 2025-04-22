@@ -7,15 +7,18 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stats": "cloc src"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.487.0",
+    "motion": "^12.7.4",
     "next": "15.3.0",
     "prisma": "^6.6.0",
     "react": "^19.0.0",
