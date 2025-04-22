@@ -7,6 +7,7 @@ import Form from "next/form";
 import database from "@/config/database";
 import Divider from "./components/divider";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "🌩️ Snippify",
@@ -17,12 +18,14 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
 
   //get meta data
   const items = await database.snippet.findMany();
+  const users = await database.user.count();
 
   return (
     <html lang="en" className="h-full">
 
-      {/* Enable Vercel Analytics */}
+      {/* Enable Vercel Analytics && Speed Insights */}
       <Analytics mode="auto" />
+      <SpeedInsights />
 
       <body className="h-full">
         <header className="border-b items-center border-stack p-6 gap-6 justify-between flex shrink-0">
@@ -47,13 +50,16 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
             />
           </Form>
 
-          <div className="flex gap-4">
+          <div className="flex gap-8">
             {links.map((link) =>
               <Link
-                className="opacity-50 hover:opacity-100"
                 key={link.key}
-                title={link.title}
-                href={link.href}> {link.icon} </Link>)}
+                href={link.href}
+                className="flex gap-2 no-underline items-center opacity-50">
+                {link.icon}
+                {link.title}
+              </Link>
+            )}
           </div>
 
         </header>
@@ -86,8 +92,9 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
               {children}
             </main>
 
-            <footer className="px-4 py-2 gap-2 border-t border-stack">
+            <footer className="px-4 flex py-2 gap-4 border-t border-stack">
               <i className="text-sm opacity-50"> {items.length} snippets total </i>
+              <i className="text-sm opacity-50"> {users} users total </i>
             </footer>
 
           </div>

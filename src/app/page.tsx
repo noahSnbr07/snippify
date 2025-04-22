@@ -1,31 +1,30 @@
 'use server';
-
-import database from "@/config/database";
+import { Snippet as SnippetInterface } from "@prisma/client";
 import Snippet from "./components/snippet";
-import { Prisma, Tag } from "@prisma/client";
+import endpoints from "@/assets/constants/endpoints";
 
 export default async function page({ searchParams }: { searchParams: Promise<{ query: string; tag: string }> }) {
   const { query, tag } = await searchParams;
 
-  const filters: Prisma.SnippetWhereInput = {};
+  //define type for api response
+  type SnippetResponse = { data: SnippetInterface[]; };
 
-  if (query) {
-    filters.OR = [
-      { title: { contains: query, mode: 'insensitive' } },
-      { description: { contains: query, mode: 'insensitive' } },
-    ];
-  }
-
-  if (tag) filters.tags = { has: tag as Tag };
-
-  const snippets = await database.snippet.findMany({
-    where: Object.keys(filters).length > 0 ? filters : undefined,
-  });
+  //retrieve data from api
+  const dbQuery = endpoints(query, null, true, tag).snippet.get.search;
+  const response = await fetch(dbQuery);
+  const data: SnippetResponse = await response.json();
 
   return (
     <div className="flex-1 content-start grid grid-cols-2 overflow-y-scroll gap-4">
-      {snippets.map((snippet, key) => (
-        <Snippet key={key} snippet={snippet} />
+      {data.data.map((snippet, key) => (
+        <Snippet
+          index={key}
+          description={snippet.description}
+          key={key}
+          body={snippet.body}
+          language={snippet.language as string}
+          slug={snippet.slug}
+          title={snippet.title} />
       ))}
     </div>
   );
