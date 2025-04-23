@@ -2,7 +2,7 @@
 
 :root {
   --background: #cecece;
-  --foreground: #101010;
+  --foreground: #050505;
   --stack: rgba(127, 127, 127, .25);
 }
 
@@ -16,7 +16,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #101010;
+    --background: #050505;
     --foreground: #cecece;
   }
 }

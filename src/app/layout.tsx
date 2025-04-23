@@ -50,12 +50,12 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
             />
           </Form>
 
-          <div className="flex gap-8">
+          <div className="flex gap-4">
             {links.map((link) =>
               <Link
                 key={link.key}
                 href={link.href}
-                className="flex gap-2 no-underline items-center opacity-50">
+                className="flex hover:opacity-100 rounded-md hover:bg-stack px-4 py-1 gap-2 no-underline items-center opacity-50">
                 {link.icon}
                 {link.title}
               </Link>
