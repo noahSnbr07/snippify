@@ -15,15 +15,16 @@ const base = (absolute: boolean) => `${absolute ? prefix + "/" : ""}api`;
  * const me = await fetch(endpoints(null, null).user.get.me);
  * <form action={endpoints(null, "logging").snippet.post.delete} />
  */
-const endpoints = (param: string | null, slug: string | null, absolute = false, tag?: string | null) => {
+const endpoints = (param: string | null, slug: string | null, absolute = false, tag?: string | null, page?: number | null) => {
     const encodedParam = encodeURIComponent(param || "");
     const encodedTag = encodeURIComponent(tag || "");
+    const encodedPage = encodeURIComponent(page || 0);
 
     return {
         snippet: {
             get: {
                 retrieve: `${base(absolute)}/snippet/retrieve/${encodedParam}/`,
-                search: `${base(absolute)}/snippet/search?query=${encodedParam}&tag=${encodedTag}`
+                search: `${base(absolute)}/snippet/search?query=${encodedParam}&tag=${encodedTag}&page=${encodedPage}`
             },
             post: {
                 delete: `${base(absolute)}/snippet/delete/${slug || ""}/`,
