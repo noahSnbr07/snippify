@@ -29,6 +29,9 @@ export async function POST(_request: NextRequest) {
         const user = await database.user.findUnique({ where: { name: name } });
         if (!user) return NextResponse.redirect(`${prefix}/error?status=404&message=user+not+found`);
 
+        //user is suspended/deactivated
+        if (user.isDeactivated) return NextResponse.redirect(`${prefix}/error?status=403&message=account+deactivated`);
+
         //validate credentials
         const match: boolean = user.password === formPassword;
 
