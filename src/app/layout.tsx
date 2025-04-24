@@ -8,6 +8,8 @@ import database from "@/config/database";
 import Divider from "./components/divider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Pagination from "./components/pagination";
+import getDatabaseStats from "./actions/get-database-stats";
 
 export const metadata: Metadata = {
   title: "🌩️ Snippify",
@@ -17,8 +19,8 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
   //get meta data
-  const items = await database.snippet.findMany();
-  const users = await database.user.count();
+  const snippets = await database.snippet.findMany({ take: 10, orderBy: { created: "desc" } });
+  const { totalUsers, totalSnippets, totalPages } = await getDatabaseStats();
 
   return (
     <html lang="en" className="h-full">
@@ -39,6 +41,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
               title="Snippify Icon"
             />
           </Link>
+          <Pagination />
           <Form
             className="flex-1 flex justify-center"
             action={"/"}>
@@ -50,7 +53,7 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
             />
           </Form>
 
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             {links.map((link) =>
               <Link
                 key={link.key}
@@ -65,9 +68,9 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
         </header>
         <div className="size-full flex flex-1 overflow-hidden">
           <aside className="p-4 overflow-y-auto border-r border-stack flex flex-col gap-2 w-1/6 min-w-[200px]">
-            <b> recently added </b>
+            <b> 10 most recent </b>
             <div className="flex flex-col gap-2">
-              {items.map((item, index) => (
+              {snippets.map((item, index) => (
                 <Link
                   className="hover:opacity-100 opacity-50"
                   href={`/snippet/${item.slug}`}
@@ -92,9 +95,10 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
               {children}
             </main>
 
-            <footer className="px-4 flex py-2 gap-4 border-t border-stack">
-              <i className="text-sm opacity-50"> {items.length} snippets total </i>
-              <i className="text-sm opacity-50"> {users} users total </i>
+            <footer className="px-4 flex py-2 gap-8 border-t border-stack">
+              <i className="text-sm opacity-50"> {totalSnippets} snippets total </i>
+              <i className="text-sm opacity-50"> {totalUsers} users total </i>
+              <i className="text-sm opacity-50"> {totalPages + 1} pages total </i>
             </footer>
 
           </div>
