@@ -1,15 +1,6 @@
+import Authentication from "@/interfaces/authentication";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-
-interface Authentication {
-    name: string;
-    id: string;
-    isDeactivated: boolean;
-    isAdmin: boolean;
-    iat: number;
-    exp: number;
-    iss: string;
-}
 
 // This function returns the decoded data if valid, or null if invalid
 export default async function getAuthentication(): Promise<Authentication | null> {
