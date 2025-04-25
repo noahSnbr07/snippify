@@ -74,16 +74,6 @@ export default async function page() {
                     )}
                 </select>
                 <Divider />
-
-                {/* Authorize Access */}
-                <input
-                    required
-                    name="authorization"
-                    className="form-element"
-                    type="password"
-                    placeholder="your password"
-                />
-
                 {/* Submit Form */}
                 <button
                     className="border p-4 font-bold text-lg rounded-lg"
