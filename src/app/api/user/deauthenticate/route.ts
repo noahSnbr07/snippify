@@ -1,4 +1,5 @@
 import getPrefix from "@/functions/get-prefix";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -14,6 +15,9 @@ export async function POST() {
 
         //delete token
         cookieStore.delete("token");
+
+        //clear memory
+        revalidatePath('/', 'layout');
 
         //redirect auth page
         return NextResponse.redirect(`${prefix}/authentication`);

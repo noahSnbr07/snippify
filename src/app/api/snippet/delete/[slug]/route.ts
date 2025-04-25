@@ -15,20 +15,8 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
     //get prefix
     const prefix = getPrefix();
 
-    const userId: string = authenticationState.id;
-    const user = await database.user.findUnique({ where: { id: userId } });
-
     //get slug
     const slug = (await params).slug;
-
-    //get auth key
-    const key = user?.password || "";
-    const formData = await _request.formData();
-    const authorization = formData.get("authorization") as string;
-
-
-    // redirect if auth fails
-    if (authorization != key) redirect(`/error?status=401&message=credentials+mismatch`);
 
     //display raw message
     if (!slug || slug.length < 1) return NextResponse.json({

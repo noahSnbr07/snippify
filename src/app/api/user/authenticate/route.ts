@@ -2,6 +2,7 @@ import database from "@/config/database";
 import getPrefix from "@/functions/get-prefix";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { revalidatePath } from "next/cache";
 
 export async function POST(_request: NextRequest) {
 
@@ -71,7 +72,7 @@ export async function POST(_request: NextRequest) {
                 secure: process.env.NODE_ENV === "production",
             });
 
-
+            revalidatePath('/', 'layout');
             return response;
         }
 

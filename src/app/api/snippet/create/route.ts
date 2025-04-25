@@ -19,10 +19,6 @@ export async function POST(_request: NextRequest) {
     const formData = await _request.formData();
 
     const userId: string = authenticationState.id;
-    const user = await database.user.findUnique({ where: { id: userId } });
-
-    //get auth key
-    const key = user?.password || "";
 
     // Get form data
     const title = formData.get('title') as string;
@@ -31,15 +27,11 @@ export async function POST(_request: NextRequest) {
     const language = formData.get('language') as string;
     const tags = formData.getAll('tags') || [] as string[];
 
-    const authorization = formData.get('authorization') as string;
-
     // Check for missing detail/ auth
-    const missingDetail: boolean = !title || !description || !body || !language || !authorization;
-    const invalidAuth: boolean = authorization != key;
+    const missingDetail: boolean = !title || !description || !body || !language;
 
     //invalid body || auth -> redirect
     if (missingDetail) return redirect(`/error?status=500&message=invalid+form`);
-    if (invalidAuth) return redirect(`/error?status=401&message=credential+mismatch`);
 
     // Generate slug by title
     const slug = getSlug(title);
@@ -66,7 +58,7 @@ export async function POST(_request: NextRequest) {
         });
 
         // Clear cache on items
-        revalidatePath('/', 'layout')
+        revalidatePath('/', 'layout');
 
         // Redirect with NextResponse
         return NextResponse.redirect(`${prefix}/snippet/${inserted.slug}`);
