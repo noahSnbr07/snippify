@@ -13,7 +13,7 @@ interface HeaderLink {
 const links: HeaderLink[] = [
     { key: 0, title: "Admin", href: "/admin", icon: <Shield size={20} /> },
     { key: 1, title: "Create", href: "/create", icon: <Plus size={20} /> },
-    { key: 2, title: "Contact", href: "https://www.instagram.com/noah.codes.stuff/", icon: <Mail size={20} /> },
+    { key: 2, title: "Contact", href: "/contact", icon: <Mail size={20} /> },
     { key: 3, title: "Account", href: "/authentication", icon: <User size={20} /> },
 ];
 
