@@ -7,7 +7,7 @@ export default async function page() {
 
     return (
         <div className="flex-1 flex flex-col gap-4">
-            <h1 className="text-lg font-bold"> Create Snippet </h1>
+            <b className="text-lg font-bold"> Create Snippet </b>
             <form
                 method="POST"
                 action={endpoints(null, null).snippet.post.create}
