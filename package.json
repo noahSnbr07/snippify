@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "stats": "cloc src"
+    "stats": "cloc src",
+    "document": "node scripts/document.js"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
