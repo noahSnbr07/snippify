@@ -20,7 +20,7 @@ export default async function MetaData({ item }: props) {
 
     return (
         <div className="flex-1 px-4 flex flex-col gap-4">
-            <h1 className="font-bold text-xl"> {item.title} </h1>
+            <b className="text-xl"> {item.title} </b>
             <p> {item.description} </p>
             <Divider />
             <Link
