@@ -1,5 +1,3 @@
-'use server';
-
 import database from "@/config/database";
 import { redirect } from "next/navigation";
 import MetaData from "../components/meta-data";
