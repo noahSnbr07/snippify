@@ -9,19 +9,21 @@ export default function BreadCrumb() {
     const path = usePathname();
 
     const getCrumb = (): string => {
-        if (path === "/") return "home";
-        return path.replaceAll("/", " ~ ").trim().replace("~", "");
-    }
+        if (path === "/") return "Snippify";
+        const parts = path.split("/").filter(Boolean);
+        return parts[parts.length - 1];
+    };
 
     const crumb = getCrumb();
 
     return (
         <Link
+            title="Route Bread Crumb"
             className="hover:bg-stack px-4 py-1 rounded-sm"
             href={"/"}>
-            <b className="opacity-50">
-                {crumb}
-            </b>
+            <h1 className="opacity-50 font-bold">
+                <strong> {crumb} </strong>
+            </h1>
         </Link>
     );
 }

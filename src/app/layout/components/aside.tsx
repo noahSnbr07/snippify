@@ -2,31 +2,34 @@
 
 import ActionButton from "@/app/components/action-button";
 import Divider from "@/app/components/divider";
-import endpoints from "@/assets/constants/endpoints";
+import { tags } from "@/assets/assets";
+import database from "@/config/database";
 import getAuthentication from "@/functions/get-authentication";
-import SnippetWithUser from "@/interfaces/snippet-with-user";
-import { Tag } from "@prisma/client";
 import { LogIn, LogOut } from "lucide-react";
 import Link from "next/link";
 
-interface props {
-    snippets: SnippetWithUser[];
-    tags: Tag[];
-}
-
-export default async function Aside({ snippets, tags }: props) {
+export default async function Aside() {
 
     const authentication = await getAuthentication();
+
+    //get meta data
+    const links = await database.snippet.findMany({
+        take: 10,
+        orderBy: {
+            created: "desc"
+        },
+        select: { slug: true },
+    });
 
     return (
         <aside className="p-4 overflow-y-auto border-r border-stack flex flex-col gap-2 w-1/6 min-w-[200px]">
             <b> 10 most recent </b>
             <div className="flex flex-col gap-2">
-                {snippets.map((item, index) => (
+                {links.map((link, index) => (
                     <Link
                         className="hover:opacity-100 opacity-50"
-                        href={`/snippet/${item.slug}`}
-                        key={index}> {item.slug} </Link>
+                        href={`/snippet/${link.slug}`}
+                        key={index}> {link.slug} </Link>
                 ))}
             </div>
             <Divider />
@@ -43,12 +46,12 @@ export default async function Aside({ snippets, tags }: props) {
                 <b> Account </b>
                 <ActionButton
                     title="Deauthenticate"
-                    icon={<LogOut />}
-                    endpoint={endpoints(null, null, false, null).user.post.deauthenticate}
+                    icon={<LogOut opacity={.5} />}
+                    endpoint={"/api/user/deauthenticate"}
                 />
                 <ActionButton
                     title="Authenticate"
-                    icon={<LogIn />}
+                    icon={<LogIn opacity={.5} />}
                     endpoint={"/authentication"}
                 />
                 <i className="opacity-50">
