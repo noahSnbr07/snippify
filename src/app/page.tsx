@@ -1,19 +1,44 @@
-'use server';
-import { Snippet as SnippetInterface } from "@prisma/client";
+import { Tag } from "@prisma/client";
 import Snippet from "./components/snippet";
-import endpoints from "@/assets/constants/endpoints";
+import database from "@/config/database";
+import paginationConfig from "@/config/pagination";
 
-export default async function index({ searchParams }: { searchParams: Promise<{ query: string; tag: string; page: number; }> }) {
-  const { query, tag, page } = await searchParams;
+export default async function index({ searchParams }: { searchParams: Promise<{ query?: string; tag?: Tag; page?: number; }> }) {
+  const { query, tag, page = 0 } = await searchParams;
 
-  //define type for api response
-  type SnippetResponse = { data: { snippets: SnippetInterface[]; } };
+  const limit = paginationConfig.results;
+  const safeQuery = query ?? "";
 
-  //retrieve data from api
-  const dbQuery = endpoints(query, null, true, tag, page).snippet.get.search;
-  const response = await fetch(dbQuery);
-  const data: SnippetResponse = await response.json();
-  const snippets = data.data.snippets;
+  const snippets = await database.snippet.findMany({
+    where: {
+      AND: [
+        {
+          OR: [
+            {
+              title: {
+                contains: safeQuery,
+                mode: "insensitive"
+              }
+            },
+            {
+              description: {
+                contains: safeQuery,
+                mode: "insensitive"
+              }
+            },
+          ],
+        },
+        ...(tag ? [
+          {
+            tags: {
+              has: tag
+            }
+          }] : []),
+      ],
+    },
+    take: limit,
+    skip: page * limit,
+  });
 
   return (
     <div className="flex-1 content-start grid grid-cols-2 overflow-y-scroll gap-4">
