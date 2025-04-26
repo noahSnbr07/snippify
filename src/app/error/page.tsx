@@ -11,7 +11,7 @@ export default async function page({ searchParams }: { searchParams: Promise<{ s
 
     return (
         <div className="flex size-full items-center justify-center flex-col gap-4">
-            <h1 className="text-3xl font-bold"> {status} </h1>
+            <b className="text-3xl font-bold"> {status} </b>
             <Divider width={128} />
             <i className="opacity-50"> {message} </i>
         </div>
