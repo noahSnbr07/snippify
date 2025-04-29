@@ -11,7 +11,7 @@ export async function POST(_request: NextRequest) {
     const password = formData.get("password") as string;
 
     if (!name || name.length < 1 || !password || password.length < 1)
-        return NextResponse.redirect(`/error?status=500&message=invalid+inputs`);
+        return NextResponse.redirect(`${prefix}/error?status=500&message=invalid+inputs`);
 
     const passwordHash: string = await hash(password, 10);
 
