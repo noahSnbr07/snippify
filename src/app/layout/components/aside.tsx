@@ -45,12 +45,12 @@ export default async function Aside() {
             <div className="flex flex-col gap-2">
                 <b> Account </b>
                 <ActionButton
-                    title="Deauthenticate"
+                    title="Logout"
                     icon={<LogOut opacity={.5} />}
-                    endpoint={"/api/user/deauthenticate"}
+                    endpoint={"/api/user/logout"}
                 />
                 <ActionButton
-                    title="Authenticate"
+                    title="Login"
                     icon={<LogIn opacity={.5} />}
                     endpoint={"/authentication"}
                 />

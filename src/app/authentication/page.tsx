@@ -4,8 +4,6 @@ import { banner } from "@/assets/assets";
 import Image from "next/image";
 import getAuthentication from "@/functions/get-authentication";
 import { Clock, Info } from "lucide-react";
-import Link from "next/link";
-import endpoints from "@/assets/constants/endpoints";
 import getTokenExpiration from "@/functions/get-toke-expiration";
 
 export default async function page() {
@@ -25,7 +23,7 @@ export default async function page() {
                 <>
                     <form
                         method="POST"
-                        action={endpoints(null, null).user.post.authenticate}
+                        action={"/api/user/authenticate"}
                         className="flex flex-col gap-4 p-4 bg-stack w-min rounded-lg"
                     >
                         <input
@@ -40,18 +38,19 @@ export default async function page() {
                             type="password"
                             name="password"
                         />
-                        <button
-                            type="submit"
-                            className="p-2 border font-bold rounded-lg"> Submit </button>
+                        <div className="flex gap-4">
+                            <button
+                                name="action"
+                                value={"register"}
+                                type="submit"
+                                className="flex-1 font-bold p-2 bg-stack rounded-lg"> Register </button>
+                            <button
+                                name="action"
+                                value={"login"}
+                                type="submit"
+                                className="flex-1 border font-bold p-2 rounded-lg"> Login </button>
+                        </div>
                     </form>
-                    <div className="flex gap-2 items-center">
-                        <Info size={16} className="opacity-50" />
-                        <i className="opacity-50">
-                            An Account has to be requested
-                            <Link
-                                href={"https://www.instagram.com/noahcodesstuff/"}> here </Link>
-                        </i>
-                    </div>
                 </>
             )}
 
@@ -64,11 +63,11 @@ export default async function page() {
                     </div>
                     <div className="flex gap-2 items-center">
                         <Clock size={16} className="opacity-50" />
-                        <i className="opacity-50"> Your token expires at {expiration || ""} </i>
+                        <i className="opacity-50"> Your token expires at {expiration || "an error occurred"} </i>
                     </div>
                     <form
                         method="POST"
-                        action={endpoints(null, null).user.post.deauthenticate}>
+                        action={"/api/user/deauthenticate"}>
                         <button
                             type="submit"
                             className="px-8 py-2 rounded-lg bg-stack font-bold"> log out </button>
