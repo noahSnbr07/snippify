@@ -19,7 +19,7 @@ export default function BreadCrumb() {
     return (
         <Link
             title="Route Bread Crumb"
-            className="hover:bg-stack px-4 py-1 rounded-sm"
+            className="hover:bg-stack hidden xl:block px-4 py-1 rounded-sm"
             href={"/"}>
             <h1 className="opacity-50 font-bold">
                 <strong> {crumb} </strong>

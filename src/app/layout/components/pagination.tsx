@@ -26,10 +26,10 @@ function PaginationComponent() {
     const currentIndex = page + paginationConfig.startIndex;
 
     //define navigation functions
-    const goPrevious = () => router.push(`/?page=${page - 1 < 0 ? 0 : page - 1}`);
-    const goNext = () => router.push(`/?page=${page + 1}`);
-    const goFirst = () => router.push("/?page=0");
-    const goLast = () => router.push(`/?page=${lastPageIndex}`);
+    const goPrevious = () => router.push(`?page=${page - 1 < 0 ? 0 : page - 1}`);
+    const goNext = () => router.push(`?page=${page + 1}`);
+    const goFirst = () => router.push("?page=0");
+    const goLast = () => router.push(`?page=${lastPageIndex}`);
 
     return (
         <div className="flex h-8 gap-2 items-center rounded-lg">

@@ -4,12 +4,14 @@
   --background: #cecece;
   --foreground: #050505;
   --stack: rgba(127, 127, 127, .25);
+  --warn: rgba(255, 255, 0, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-stack: var(--stack);
+  --color-warn: var(--warn);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

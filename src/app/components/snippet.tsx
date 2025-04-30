@@ -11,14 +11,13 @@ interface props {
     body: string;
     language: string;
     description: string;
-    index: number;
 }
 
 export default function Snippet({ slug, title, body, language, description }: props) {
 
     return (
         <div
-            className="bordered h-[400px] p-4 rounded-lg flex gap-2 flex-col">
+            className="bordered h-[400px] w-full p-4 rounded-lg flex gap-2 flex-col">
             <p className="text-sm opacity-50"> {slug} </p>
             <Link href={`/snippet/${slug}`}>
                 <b className="text-lg"> {title} </b>
@@ -32,7 +31,6 @@ export default function Snippet({ slug, title, body, language, description }: pr
             <Divider />
 
             <p className="truncate"> {description} </p>
-
         </div>
     );
 }

@@ -21,6 +21,8 @@ export default async function Page() {
                     <div key={user.id} className="flex flex-col gap-2 bg-stack p-2 rounded-lg">
                         <b>{user.name}</b>
                         <p className="text-xs opacity-50">{user.id}</p>
+                        {user.isDeactivated && <p className="text-warn text-sm"> * DEACTIVATED </p>}
+                        {user.isAdmin && <p className="text-warn text-sm"> * ADMIN </p>}
                         <div className="flex gap-2">
                             <ActionButton
                                 title="Delete"

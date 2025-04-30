@@ -22,7 +22,7 @@ export default async function Aside() {
     });
 
     return (
-        <aside className="p-4 overflow-y-auto border-r border-stack flex flex-col gap-2 w-1/6 min-w-[200px]">
+        <aside className="p-4 overflow-y-auto border-r border-stack hidden lg:flex flex-col gap-2 w-1/6 min-w-[200px]">
             <b> 10 most recent </b>
             <div className="flex flex-col gap-2">
                 {links.map((link, index) => (
@@ -55,7 +55,7 @@ export default async function Aside() {
                     endpoint={"/authentication"}
                 />
                 <i className="opacity-50">
-                    {authentication ? `Authenticated as ${authentication.name}` : "Not Authenticated"}
+                    {authentication ? `Logged In as ${authentication.name}` : "Not Logged In"}
                 </i>
             </div>
         </aside>

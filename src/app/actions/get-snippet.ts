@@ -18,8 +18,7 @@ export default async function getSnippet(slug: string) {
         }
 
         return snippet;
-    } catch (error) {
-        console.error(error);
+    } catch {
         throw new Error('Failed to fetch snippet');
     }
 }

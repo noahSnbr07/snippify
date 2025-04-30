@@ -1,5 +1,4 @@
 import Divider from "@/app/components/divider";
-import endpoints from "@/assets/constants/endpoints";
 import getAuthentication from "@/functions/get-authentication";
 import SnippetWithUser from "@/interfaces/snippet-with-user";
 import { Tag } from "@prisma/client";
@@ -44,7 +43,7 @@ export default async function MetaData({ item }: props) {
                     <ActionButton
                         icon={<Trash />}
                         title="Delete Snippet"
-                        endpoint={endpoints(null, item.slug, true, null, null).snippet.post.delete} />
+                        endpoint={`/api/snippet/delete/${item.slug}`} />
                     <Divider />
                 </>
             )}

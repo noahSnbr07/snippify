@@ -62,8 +62,7 @@ export async function POST(_request: NextRequest) {
 
         // Redirect with NextResponse
         return NextResponse.redirect(`${prefix}/snippet/${inserted.slug}`);
-    } catch (error) {
-        console.log(error);
+    } catch {
         return NextResponse.redirect(`${prefix}/error`)
     }
 }

@@ -12,15 +12,17 @@ interface props {
 export default async function Page({ params }: props) {
     const { slug } = await params;
 
+    //get snippet
     const item = await database.snippet.findUnique({
         where: { slug: slug },
         include: { user: true }
     }) as SnippetWithUser;
 
+    //not found -> redirect
     if (!item) redirect(`/error?status=404&message=not+found`);
 
     return (
-        <div className="flex-1 flex">
+        <div className="size-full flex">
             <CodeBlock
                 language={item.language as BundledLanguage}
                 code={item.body} />

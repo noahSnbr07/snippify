@@ -80,8 +80,7 @@ export async function POST(_request: NextRequest) {
         //no match
         return NextResponse.redirect(`${prefix}/error?status=401&message=credential+mismatch`);
 
-    } catch (error) {
-        console.error(error)
+    } catch {
         return NextResponse.redirect(`${prefix}/error?status=500&message=uncaught+error`);
     }
 }

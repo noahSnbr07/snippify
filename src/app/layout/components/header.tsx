@@ -2,22 +2,33 @@
 
 import BreadCrumb from "@/app/layout/components/bread-crumb";
 import Pagination from "@/app/layout/components/pagination";
-import { banner, links } from "@/assets/assets";
+import { banner, icon, links } from "@/assets/assets";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Dropdown from "./dropdown";
 
 export default async function Header() {
 
 
     return (
-        <header className="border-b items-center border-stack p-6 gap-6 justify-between flex shrink-0">
+        <header className="border-b items-center border-stack p-3 gap-3 lg:p-6 lg:gap-6 justify-between flex shrink-0">
             <Link
                 href={"/"}>
                 <Image
+                    className="hidden lg:block"
                     src={banner}
                     priority
                     height={32}
+                    alt="Snippify Icon"
+                    title="Snippify Icon"
+                />
+                <Image
+                    className="block lg:hidden object-contain aspect-square"
+                    src={icon}
+                    priority
+                    height={32}
+                    width={16}
                     alt="Snippify Icon"
                     title="Snippify Icon"
                 />
@@ -26,19 +37,20 @@ export default async function Header() {
             <BreadCrumb />
             <div className="flex-1 flex justify-center">
                 <form
-                    className="flex items-center px-4 gap-4 py-1 bg-stack rounded-full"
+                    className="flex-1 flex items-center px-4 gap-4 py-1 bg-stack rounded-full"
                     action={"/"}>
                     <input
                         type="text"
                         name="query"
                         placeholder="search snippets"
-                        className="w-[300px] flex-1"
+                        className="flex-1 w-full"
                     />
                     <Search size={20} opacity={.5} />
                 </form>
             </div>
 
-            <div className="flex gap-2">
+            {/* only rendered if screen width > 1024px */}
+            <div className="hidden lg:flex gap-2">
                 {links.map((link) =>
                     <Link
                         key={link.key}
@@ -49,6 +61,9 @@ export default async function Header() {
                     </Link>
                 )}
             </div>
+
+            {/* only rendered if screen width < 1024px */}
+            <Dropdown />
 
         </header>
     );
