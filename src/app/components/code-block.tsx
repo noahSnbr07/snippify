@@ -29,7 +29,7 @@ export default function CodeBlock({ code, language }: Props) {
 
     return (
         <div
-            className="shiki flex-1 overflow-auto rounded-lg text-sm"
+            className="shiki flex-1 max-w-full overflow-auto rounded-lg text-sm"
             dangerouslySetInnerHTML={{ __html: html }}
         />
     );

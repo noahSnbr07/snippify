@@ -14,7 +14,7 @@ export default async function Page() {
     const snippets = await database.snippet.findMany({ include: { user: true } });
 
     return (
-        <div className="flex gap-4">
+        <div className="flex gap-4 p-4">
             <div className="flex flex-col gap-2 overflow-auto">
                 <b className="text-2xl">Users</b>
                 {users.map(user => (

@@ -38,7 +38,7 @@ export default function SnippetList({ query, tag, page }: props) {
     </div>);
 
     return (
-        <div className="flex-1 content-start grid lg:grid-cols-2 overflow-y-scroll gap-4">
+        <div className="grid lg:grid-cols-2 flex-1 gap-4">
             {!loading && snippets?.map(function (snippet, _index) {
                 return (
                     <Snippet

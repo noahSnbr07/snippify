@@ -22,7 +22,7 @@ export default async function Page({ params }: props) {
     if (!item) redirect(`/error?status=404&message=not+found`);
 
     return (
-        <div className="size-full flex">
+        <div className="size-full flex p-4">
             <CodeBlock
                 language={item.language as BundledLanguage}
                 code={item.body} />

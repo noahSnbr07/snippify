@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Snippet {
+  id          String   @id @default(uuid())
+  created     DateTime @default(now())
+  updated     DateTime @updatedAt
+  slug        String   @unique
+  title       String
+  body        String
+  description String
+  language    Language
+  tags        Tag[]
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      String?
+}
+
+model User {
+  id             String    @id @default(uuid())
+  created        DateTime  @default(now())
+  updated        DateTime  @updatedAt
+  lastLogin      DateTime  @default(now())
+  name           String    @unique
+  password       String
+  isDeactivated  Boolean   @default(false)
+  isAdmin        Boolean   @default(false)
+  snippetsPosted Snippet[]
+}
+
+enum Language {
+  bash
+  c
+  cpp
+  cs
+  csharp
+  css
+  csv
+  dart
+  go
+  html
+  java
+  javascript
+  json
+  jsx
+  kotlin
+  php
+  prisma
+  python
+  ruby
+  rust
+  sass
+  sql
+  svelte
+  swift
+  tsx
+  typescript
+}
+
+enum Tag {
+  web
+  native
+  backend
+  frontend
+  fullstack
+  asynchronous
+  database
+  config
+  server
+  client
+  middleware
+  devops
+  auth
+  api
+}

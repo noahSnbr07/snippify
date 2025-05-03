@@ -8,7 +8,7 @@ export default async function page() {
 
 
     return (
-        <div className="flex flex-col gap-2 overflow-auto">
+        <div className="flex flex-col gap-4 overflow-auto p-4">
             {contacts.map((contact) => (
                 <Link
                     key={contact.id}

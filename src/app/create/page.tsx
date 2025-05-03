@@ -6,7 +6,7 @@ import endpoints from "@/assets/constants/endpoints";
 export default async function page() {
 
     return (
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex-1 flex flex-col p-4">
             <b className="text-lg font-bold"> Create Snippet </b>
             <form
                 method="POST"

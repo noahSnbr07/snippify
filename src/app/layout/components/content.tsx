@@ -14,7 +14,7 @@ export default async function Content({ children }: props) {
     return (
         <div className="flex overflow-hidden flex-col flex-1">
 
-            <main className="flex-1 overflow-y-auto flex p-4">
+            <main className="flex-1 overflow-y-auto flex">
                 {children}
             </main>
 

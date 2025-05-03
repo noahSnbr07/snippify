@@ -33,11 +33,11 @@ export default async function Header() {
                     title="Snippify Icon"
                 />
             </Link>
-            <Pagination />
+            <div className="hidden lg:block"><Pagination /></div>
             <BreadCrumb />
             <div className="flex-1 flex justify-center">
                 <form
-                    className="flex-1 flex items-center px-4 gap-4 py-1 bg-stack rounded-full"
+                    className="flex-1 max-w-md flex items-center px-4 gap-4 py-1 bg-stack rounded-full"
                     action={"/"}>
                     <input
                         type="text"
@@ -53,11 +53,11 @@ export default async function Header() {
             <div className="hidden lg:flex gap-2">
                 {links.map((link) =>
                     <Link
+                        title={link.title}
                         key={link.key}
                         href={link.href}
                         className="flex hover:opacity-100 rounded-md hover:bg-stack px-4 py-1 gap-2 no-underline items-center opacity-50">
                         {link.icon}
-                        {link.title}
                     </Link>
                 )}
             </div>

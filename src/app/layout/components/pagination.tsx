@@ -32,10 +32,10 @@ function PaginationComponent() {
     const goLast = () => router.push(`?page=${lastPageIndex}`);
 
     return (
-        <div className="flex h-8 gap-2 items-center rounded-lg">
+        <div className="flex justify-center gap-2 items-center rounded-lg">
             <NavigationButton title="go first" icon={<ArrowLeftToLine size={20} opacity={.5} />} onClick={goFirst} />
             <NavigationButton title="go previous" icon={<ArrowLeft size={20} opacity={.5} />} onClick={goPrevious} />
-            <div className="h-full grid place-content-center aspect-square">
+            <div className="h-8 grid place-content-center aspect-square">
                 <b title="current index"> {currentIndex} </b>
             </div>
             <NavigationButton title="go next" icon={<ArrowRight size={20} opacity={.5} />} onClick={goNext} />
