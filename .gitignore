@@ -48,3 +48,6 @@ todo.md
 
 # Backups
 backups
+
+# prisma generator
+src/generated
