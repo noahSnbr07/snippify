@@ -50,4 +50,4 @@ todo.md
 backups
 
 # prisma generator
-src/generated
+/src/generated/prisma
