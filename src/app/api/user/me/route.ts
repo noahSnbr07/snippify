@@ -5,19 +5,11 @@ import { NextRequest, NextResponse } from "next/server";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(_request: NextRequest) {
     const authentication = await getAuthentication();
-    if (!authentication) return NextResponse.json(
-        {
-            message: "Not Authenticated",
-            ok: false,
-            status: 401,
-            data: null,
-            error: null,
-        }, { status: 401 });
 
     try {
         const user = await database.user.findUnique({
             where: {
-                id: authentication.id
+                id: authentication?.id || ""
             },
             omit: { password: true }
         });

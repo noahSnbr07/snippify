@@ -1,3 +1,5 @@
+"use server";
+
 import Authentication from "@/interfaces/authentication";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";

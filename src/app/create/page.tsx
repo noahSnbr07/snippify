@@ -1,7 +1,6 @@
 "use server";
 import { languages, tags } from "@/assets/assets";
 import Divider from "../components/divider";
-import endpoints from "@/assets/constants/endpoints";
 
 export default async function page() {
 
@@ -10,7 +9,7 @@ export default async function page() {
             <b className="text-lg font-bold"> Create Snippet </b>
             <form
                 method="POST"
-                action={endpoints(null, null).snippet.post.create}
+                action={`/api/snippet/create`}
                 className="bg-stack max-w-5xl flex flex-col gap-4 p-4 rounded-lg">
 
                 {/* Enter Title */}

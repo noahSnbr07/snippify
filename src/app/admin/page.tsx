@@ -1,15 +1,10 @@
 'use server';
 
 import database from "@/config/database";
-import getAuthentication from "@/functions/get-authentication";
-import { redirect } from "next/navigation";
 import ActionButton from "./components/action-button";
 import { deactivateUser, deleteSnippet, deleteUser, reactivateUser } from "../actions/sudo-commands";
 
 export default async function Page() {
-    const authentication = await getAuthentication();
-    if (!authentication?.isAdmin) redirect("/error?status=403&message=unauthorized");
-
     const users = await database.user.findMany();
     const snippets = await database.snippet.findMany({ include: { user: true } });
 
