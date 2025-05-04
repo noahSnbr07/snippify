@@ -2,11 +2,12 @@
 
 import BreadCrumb from "@/app/layout/components/bread-crumb";
 import Pagination from "@/app/layout/components/pagination";
-import { banner, icon, links } from "@/assets/assets";
+import { banner, codersResources, icon, links } from "@/assets/assets";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Dropdown from "./dropdown";
+import Partner from "./partner";
 
 export default async function Header() {
 
@@ -34,6 +35,7 @@ export default async function Header() {
                 />
             </Link>
             <div className="hidden lg:block"><Pagination /></div>
+            <Partner />
             <BreadCrumb />
             <div className="flex-1 flex justify-center">
                 <form
