@@ -13,7 +13,7 @@ export default function ShareButton({ url }: { url: string }) {
         navigator.clipboard.writeText(url)
             .catch(function () {
                 router.push(`/error?status=500&message=not+allowed`);
-            }).finally(async () => {
+            }).finally(async function () {
                 await Promise.resolve(setTimeout(() => setClicked(false), 1500));
             });
     }

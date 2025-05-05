@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Divider from "./divider";
 import CodeBlock from "./code-block";

@@ -1,10 +1,6 @@
-'use client';
-
-import { Snippet as SnippetType, Tag } from "@prisma/client";
-import { useEffect, useState } from "react";
-import getSnippets from "../actions/get-snippets";
+import { Tag } from "@prisma/client";
 import Snippet from "./snippet";
-import { ClipLoader } from "react-spinners";
+import getSnippets from "../actions/get-snippets";
 
 interface props {
     query?: string;
@@ -12,34 +8,13 @@ interface props {
     page?: number;
 }
 
-export default function SnippetList({ query, tag, page }: props) {
+export default async function SnippetList({ query, tag, page }: props) {
 
-    //define interactive variables
-    const [snippets, setSnippets] = useState<SnippetType[]>();
-    const [loading, setLoading] = useState<boolean>(false);
-
-    useEffect(function () {
-
-        //retrieve data from endpoint
-        async function get() {
-            setLoading(true);
-            const snippets = await getSnippets({ query, tag, page });
-            setSnippets(snippets);
-            setLoading(false);
-        }
-
-        //run call
-        get();
-    }, [page, query, tag]);
-
-    //return loading indicator
-    if (loading) return (<div className="size-full grid place-content-center">
-        <ClipLoader size={75} color="var(--stack)" />
-    </div>);
+    const snippets = await getSnippets({ query, tag, page });
 
     return (
         <div className="grid lg:grid-cols-2 flex-1 gap-4">
-            {!loading && snippets?.map(function (snippet, _index) {
+            {snippets?.map(function (snippet, _index) {
                 return (
                     <Snippet
                         key={_index}

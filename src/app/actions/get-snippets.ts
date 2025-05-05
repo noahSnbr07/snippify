@@ -46,6 +46,7 @@ export default async function getSnippets({ query, tag, page }: props) {
                     }] : []),
             ],
         },
+        omit: { userId: true },
         take: limit,
         skip: pageIndex * limit,
     });

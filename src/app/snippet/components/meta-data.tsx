@@ -2,7 +2,7 @@ import Divider from "@/app/components/divider";
 import getAuthentication from "@/functions/get-authentication";
 import SnippetWithUser from "@/interfaces/snippet-with-user";
 import { Tag } from "@prisma/client";
-import { ExternalLink, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import Link from "next/link";
 import ShareButton from "./share-button";
 import ActionButton from "@/app/components/action-button";
@@ -22,11 +22,7 @@ export default async function MetaData({ item }: props) {
             <b className="text-xl"> {item.title} </b>
             <p> {item.description} </p>
             <Divider />
-            <Link
-                className="underline flex gap-2"
-                href={`/user/${item.user.name}`}>
-                <ExternalLink size={20} />
-                <b> user: {item.user.name} </b> </Link>
+            <b> user: {item.user.name} </b>
             <p> created: {item.created.toLocaleDateString()} - {item.created.toLocaleTimeString()} </p>
             <p> updated: {item.updated.toLocaleDateString()} - {item.updated.toLocaleTimeString()} </p>
             <div className="flex gap-2">

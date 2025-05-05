@@ -3,7 +3,7 @@
 import { BundledLanguage, codeToHtml } from 'shiki';
 import getRawBody from '@/functions/get-raw-body';
 import React, { useEffect, useState } from 'react';
-import Scaffolding from './scaffolding';
+import { ClipLoader } from 'react-spinners';
 
 interface Props {
     code: string;
@@ -25,7 +25,10 @@ export default function CodeBlock({ code, language }: Props) {
         getHtml();
     }, [code, language]);
 
-    if (!html || html.length < 1) return <Scaffolding height={300} />
+    if (!html || html.length < 1) return
+    <div className='bg-stack h-[300px] w-full rounded-lg animate-pulse'>
+        <ClipLoader />
+    </div>;
 
     return (
         <div

@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(_request: NextRequest) {
 
     const auth = await getAuthentication();
-    if (!auth) redirect("/error?status=401&message=authenticate+to+post");
+    if (!auth) redirect("/error?status=401&message=auth+failed");
 
     //get prefix
     const prefix = getPrefix();

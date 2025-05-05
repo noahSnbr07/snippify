@@ -15,7 +15,7 @@ export default async function Page({ params }: props) {
     //get snippet
     const item = await database.snippet.findUnique({
         where: { slug: slug },
-        include: { user: true }
+        include: { user: { select: { name: true, id: true } } },
     }) as SnippetWithUser;
 
     //not found -> redirect

@@ -8,6 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(_request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
 
     const auth = await getAuthentication();
+    if (!auth) redirect(`/error?status=404&message=auth+failed`);
 
     //get prefix
     const prefix = getPrefix();
@@ -16,23 +17,24 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
     const slug = (await params).slug;
 
     //display raw message
-    if (!slug || slug.length < 1) return NextResponse.json({
-        message: "Missing/ Invalid Param",
-        ok: false,
-        status: 404,
-        data: null,
-        error: null,
-    });
+    if (!slug || slug.length < 1) redirect(`/error?status=404&message=slug+missing`);
+
 
     try {
 
         //delete snippet
-        const snippet = await database.snippet.delete({ where: { slug }, include: { user: true } });
+        const snippet = await database.snippet.findUnique({ where: { slug }, include: { user: true } });
 
-        if (!auth || auth.id !== snippet.user?.id) redirect(`/error?status=404&message=auth+failed`);
+        if (!snippet)
+            return NextResponse.redirect(`${prefix}/error?status=404&message=snippet+not+found`);
 
-        //display raw message
-        if (!snippet) return redirect(`/error?status=404&message=snippet+not+found`)
+        if (!snippet.user)
+            return NextResponse.redirect(`${prefix}/error?status=404&message=owner+not+found`);
+
+        if (auth.id !== snippet.user.id)
+            return NextResponse.redirect(`${prefix}/error?status=404&message=ownership+auth+failed`);
+
+        await database.snippet.delete({ where: { slug } });
 
         //clear cache on items
         revalidatePath('/', 'layout')
@@ -41,7 +43,6 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
         return NextResponse.redirect(prefix);
 
     } catch {
-
         return NextResponse.redirect(`${prefix}/error?status=500&message=uncaught+error`);
     }
 }
