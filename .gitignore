@@ -49,5 +49,7 @@ todo.md
 # Backups
 backups
 
-# prisma generator
-/src/generated/prisma
+# Ignore generated Prisma client
+/src/generated/prisma/
+
+mock
