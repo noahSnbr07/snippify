@@ -1,10 +1,13 @@
 import database from "@/config/database";
+import getAuthentication from "@/functions/get-authentication";
 import getPrefix from "@/functions/get-prefix";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(_request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+
+    const auth = await getAuthentication();
 
     //get prefix
     const prefix = getPrefix();
@@ -24,7 +27,9 @@ export async function POST(_request: NextRequest, { params }: { params: Promise<
     try {
 
         //delete snippet
-        const snippet = await database.snippet.delete({ where: { slug } });
+        const snippet = await database.snippet.delete({ where: { slug }, include: { user: true } });
+
+        if (!auth || auth.id !== snippet.user?.id) redirect(`/error?status=404&message=auth+failed`);
 
         //display raw message
         if (!snippet) return redirect(`/error?status=404&message=snippet+not+found`)

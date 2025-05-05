@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
     }
 
     //admin panel required admin privileges
-    if (request.nextUrl.pathname.startsWith("/admin") && !auth.isAdmin) {
+    if (request.nextUrl.pathname.startsWith("/admin") && (!auth.isAdmin || !auth)) {
         return NextResponse.redirect(new URL('/error?status=403&message=admin+access+required', request.url));
     }
 
@@ -22,10 +22,6 @@ export const config: MiddlewareConfig = {
     matcher: [
         //admin panel
         "/admin",
-
-        //mutating api endpoints
-        "/api/snippet/create",
-        "/api/snippet/delete",
         "/api/user/me",
     ],
 }

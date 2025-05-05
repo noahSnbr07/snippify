@@ -9,8 +9,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(_request: NextRequest) {
 
-    const authenticationState = await getAuthentication();
-    if (!authenticationState) redirect("/error?status=401&message=authenticate+to+post");
+    const auth = await getAuthentication();
+    if (!auth) redirect("/error?status=401&message=authenticate+to+post");
 
     //get prefix
     const prefix = getPrefix();
@@ -18,7 +18,7 @@ export async function POST(_request: NextRequest) {
     //get body/ form data
     const formData = await _request.formData();
 
-    const userId: string = authenticationState.id;
+    const userId: string = auth.id;
 
     // Get form data
     const title = formData.get('title') as string;

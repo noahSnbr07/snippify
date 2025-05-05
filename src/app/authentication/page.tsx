@@ -67,7 +67,7 @@ export default async function page() {
                     </div>
                     <form
                         method="POST"
-                        action={"/api/user/deauthenticate"}>
+                        action={"/api/user/logout"}>
                         <button
                             type="submit"
                             className="px-8 py-2 rounded-lg bg-stack font-bold"> log out </button>
